@@ -1,57 +1,99 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : PlayerController
+public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D playerRigidBody;
-    [SerializeField] private float speed = 10f;
+    [SerializeField] private float speed = 1f;
+    [SerializeField] private PlayerInput inputReader;
+    private InputAction inputAction;
 
-    private InputAction moveAction;
     private Vector2 inputValue;
+    private Vector2 movement;
+    private float timeCheck = 0f;
+    private bool moved = false;
 
     private void Awake()
     {
-        moveAction = inputReader.actions["Movement"];
+        inputAction = inputReader.actions["Movement"];
     }
 
     private void OnEnable()
     {
-        moveAction.Enable();
-        moveAction.performed += OnMovePerformed;
-        moveAction.canceled += OnMoveCanceled;
+        inputAction.Enable();
+        inputAction.performed += PlayerMove;
+        inputAction.canceled += PlayerIdle;
     }
 
     private void OnDisable()
     {
-        moveAction.Disable();
-        moveAction.performed -= OnMovePerformed;
-        moveAction.canceled += OnMoveCanceled;
+        inputAction.Disable();
+        inputAction.performed -= PlayerMove;
+        inputAction.canceled -= PlayerIdle;
     }
-
-    private void OnMovePerformed(InputAction.CallbackContext ctx)
+    
+    private void PlayerMove(InputAction.CallbackContext ctx)
     {
-        inputValue = ctx.ReadValue<Vector2>();
-        if (inputValue.sqrMagnitude > 1)
-        {
-            inputValue.Normalize();
-        }
+        movement = ctx.ReadValue<Vector2>();
+        transform.position += new Vector3(movement.x, movement.y, 0);
+        //movement = ctx.ReadValue<Vector2>();
+        Debug.Log(movement);
     }
 
-    private void OnMoveCanceled(InputAction.CallbackContext ctx)
+    private void PlayerIdle(InputAction.CallbackContext ctx)
     {
-        inputValue = Vector2.zero;
+        movement = Vector2.zero;
     }
 
-    private void FixedUpdate()
-    {
-        // Approximately zero vector means no input
-        if (inputValue.sqrMagnitude < 0.0001) { return; }
-        var rb = playerRigidBody;
 
-        // Move the rigidbody
-        Vector2 moveDirection = new Vector3(inputValue.x, inputValue.y);
-        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * moveDirection);
-    }
+    //private void Update()
+    //{
+        //if (moved)
+        //{
+        //    timeCheck += Time.deltaTime;
+        //}
+
+        //if (timeCheck > 0.2)
+        //{
+        //    moved = false;
+        //}
+
+        //if (movement != Vector2.zero && !moved)
+        //{
+        //    transform.position += new Vector3(movement.x, movement.y, 0);
+        //    moved = true;
+        //    timeCheck = 0;
+        //}
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    transform.position += new Vector3(0, speed, 0);
+        //}
+        //if (Input.GetKey(KeyCode.S))
+        //{
+        //    transform.position -= new Vector3(0, speed, 0);
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    transform.position += new Vector3(speed, 0, 0);
+        //}
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    transform.position -= new Vector3(speed, 0, 0);
+        //}
+
+        //inputValue.x = Input.GetAxis("Horizontal");
+        //inputValue.y = Input.GetAxis("Vertical");
+
+        //if (inputValue.x != 0 || inputValue.y != 0)
+        //{
+        //    transform.Translate(inputValue.x * speed * Time.deltaTime, inputValue.y * speed * Time.deltaTime, 0);
+        //}
+    //}
+
+    //private void FixedUpdate()
+    //{
+    //    //transform.Translate(movement.x * speed * Time.fixedDeltaTime, movement.y * speed * Time.fixedDeltaTime, 0);
+    //}
 }
