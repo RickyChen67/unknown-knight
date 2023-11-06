@@ -18,31 +18,28 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 movement;
 
-    //private void Awake()
-    //{
-    //    inputAction = inputReader.actions["Movement"];
-    //}
+    private void Awake()
+    {
+        inputAction = inputReader.actions["Movement"];
+    }
 
-    //private void OnEnable()
-    //{
-    //    inputAction.Enable();
-    //    inputAction.performed += PlayerMove;
-    //    inputAction.canceled += PlayerIdle;
-    //}
+    private void OnEnable()
+    {
+        inputAction.Enable();
+        inputAction.performed += PlayerMove;
+        inputAction.canceled += PlayerIdle;
+    }
 
-    //private void OnDisable()
-    //{
-    //    inputAction.Disable();
-    //    inputAction.performed -= PlayerMove;
-    //    inputAction.canceled -= PlayerIdle;
-    //}
-    
+    private void OnDisable()
+    {
+        inputAction.Disable();
+        inputAction.performed -= PlayerMove;
+        inputAction.canceled -= PlayerIdle;
+    }
+
     private void PlayerMove(InputAction.CallbackContext ctx)
     {
-        //movement += ctx.ReadValue<Vector2>();
-        //transform.position += new Vector3(movement.x, movement.y, 0);
-        //movement = ctx.ReadValue<Vector2>();
-        //Debug.Log(movement);
+        movement = ctx.ReadValue<Vector2>();
     }
 
     private void PlayerIdle(InputAction.CallbackContext ctx)
@@ -55,10 +52,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!moving)
         {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
+            input.x = movement.x;
+            input.y = movement.y;
 
-            Debug.Log(input);
             if (input.x != 0) input.y = 0;
 
             if (input != Vector2.zero)

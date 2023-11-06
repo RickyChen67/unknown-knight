@@ -5,16 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Monster", menuName = "Unknown/Create new monster")]
 public class Monster : ScriptableObject
 {
-    [SerializeField] string displayName;
+    public string monsterName;
 
     [TextArea]
-    [SerializeField] string description;
+    public string description;
+
+    public Sprite sprite;
 
     // Base Stats
-    [SerializeField] int strength;
-    [SerializeField] int toughness;
-    [SerializeField] int speed;
+    public int strength;
+    public int toughness;
+    public int speed;
 
-    [SerializeField] List<Abilities> abilities;
-    [SerializeField] List<Items> items;
+    public List<Abilities> abilities;
+    public List<Items> items;
 }

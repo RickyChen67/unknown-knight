@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
+    [SerializeField] private Monster playerStats;
     // Start is called before the first frame update
     void Start()
     {
