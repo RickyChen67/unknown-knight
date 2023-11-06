@@ -10,36 +10,39 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerInput inputReader;
     private InputAction inputAction;
 
-    private Vector2 inputValue;
+    [SerializeField] private LayerMask solidObjectsLayer;
+    private bool moving;
+    private Vector2 input;
+
+    [SerializeField] private Animator animator;
+
     private Vector2 movement;
-    private float timeCheck = 0f;
-    private bool moved = false;
 
-    private void Awake()
-    {
-        inputAction = inputReader.actions["Movement"];
-    }
+    //private void Awake()
+    //{
+    //    inputAction = inputReader.actions["Movement"];
+    //}
 
-    private void OnEnable()
-    {
-        inputAction.Enable();
-        inputAction.performed += PlayerMove;
-        inputAction.canceled += PlayerIdle;
-    }
+    //private void OnEnable()
+    //{
+    //    inputAction.Enable();
+    //    inputAction.performed += PlayerMove;
+    //    inputAction.canceled += PlayerIdle;
+    //}
 
-    private void OnDisable()
-    {
-        inputAction.Disable();
-        inputAction.performed -= PlayerMove;
-        inputAction.canceled -= PlayerIdle;
-    }
+    //private void OnDisable()
+    //{
+    //    inputAction.Disable();
+    //    inputAction.performed -= PlayerMove;
+    //    inputAction.canceled -= PlayerIdle;
+    //}
     
     private void PlayerMove(InputAction.CallbackContext ctx)
     {
-        movement = ctx.ReadValue<Vector2>();
-        transform.position += new Vector3(movement.x, movement.y, 0);
+        //movement += ctx.ReadValue<Vector2>();
+        //transform.position += new Vector3(movement.x, movement.y, 0);
         //movement = ctx.ReadValue<Vector2>();
-        Debug.Log(movement);
+        //Debug.Log(movement);
     }
 
     private void PlayerIdle(InputAction.CallbackContext ctx)
@@ -48,52 +51,54 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    //private void Update()
-    //{
-        //if (moved)
-        //{
-        //    timeCheck += Time.deltaTime;
-        //}
+    private void Update()
+    {
+        if (!moving)
+        {
+            input.x = Input.GetAxisRaw("Horizontal");
+            input.y = Input.GetAxisRaw("Vertical");
 
-        //if (timeCheck > 0.2)
-        //{
-        //    moved = false;
-        //}
+            Debug.Log(input);
+            if (input.x != 0) input.y = 0;
 
-        //if (movement != Vector2.zero && !moved)
-        //{
-        //    transform.position += new Vector3(movement.x, movement.y, 0);
-        //    moved = true;
-        //    timeCheck = 0;
-        //}
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    transform.position += new Vector3(0, speed, 0);
-        //}
-        //if (Input.GetKey(KeyCode.S))
-        //{
-        //    transform.position -= new Vector3(0, speed, 0);
-        //}
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    transform.position += new Vector3(speed, 0, 0);
-        //}
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    transform.position -= new Vector3(speed, 0, 0);
-        //}
+            if (input != Vector2.zero)
+            {
+                animator.SetFloat("moveX", input.x);
+                animator.SetFloat("moveY", input.y);
+                var targetPos = transform.position;
+                targetPos.x += input.x;
+                targetPos.y += input.y;
 
-        //inputValue.x = Input.GetAxis("Horizontal");
-        //inputValue.y = Input.GetAxis("Vertical");
+                if (Walkable(targetPos))
+                {
+                    StartCoroutine(Move(targetPos));
+                }
+            }
 
-        //if (inputValue.x != 0 || inputValue.y != 0)
-        //{
-        //    transform.Translate(inputValue.x * speed * Time.deltaTime, inputValue.y * speed * Time.deltaTime, 0);
-        //}
-    //}
+            animator.SetBool("moving", moving);
+        }
+    }
 
-    //private void FixedUpdate()
-    //{
-    //    //transform.Translate(movement.x * speed * Time.fixedDeltaTime, movement.y * speed * Time.fixedDeltaTime, 0);
-    //}
+    IEnumerator Move(Vector3 targetPos)
+    {
+        moving = true;
+
+        while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            yield return null;
+        }
+        transform.position = targetPos;
+
+        moving = false;
+    }
+
+    private bool Walkable(Vector3 targetPos)
+    {
+        if (Physics2D.OverlapCircle(targetPos, 0.1f, solidObjectsLayer) != null)
+        {
+            return false;
+        }
+        return true;
+    }
 }
