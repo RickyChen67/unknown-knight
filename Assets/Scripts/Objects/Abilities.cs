@@ -22,6 +22,6 @@ public class Abilities : ScriptableObject
     public string description;
 
     public Sprite effect;
-
+    public float cooldown;
     public AbilityType abilityType;
 }
