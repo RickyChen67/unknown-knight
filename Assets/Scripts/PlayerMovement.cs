@@ -6,17 +6,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 1f;
     [SerializeField] private PlayerInput inputReader;
     private InputAction inputAction;
-
-    [SerializeField] private LayerMask solidObjectsLayer;
-    private bool moving;
-    private Vector2 input;
-
+    private Vector2 movement;
     [SerializeField] private Animator animator;
 
-    private Vector2 movement;
+    [SerializeField] private float speed = 1f;
+    private Vector2 input;
+    private bool moving;
+    [SerializeField] private LayerMask solidObjectsLayer;
 
     private void Awake()
     {
@@ -54,8 +52,6 @@ public class PlayerMovement : MonoBehaviour
         {
             input.x = movement.x;
             input.y = movement.y;
-            //input.x = Input.GetAxisRaw("Horizontal");
-            //input.y = Input.GetAxisRaw("Vertical");
 
             if (input.x != 0) input.y = 0;
 
