@@ -12,6 +12,12 @@ public class Monster : ScriptableObject
 
     public Sprite sprite;
 
+    public int currentHealth;
+    public int maxHealth;
+    public int currentArmor;
+    public int maxArmor;
+    public float criticalChance;
+    
     // Base Stats
     public int strength;
     public int toughness;

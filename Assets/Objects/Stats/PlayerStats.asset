@@ -15,6 +15,11 @@ MonoBehaviour:
   monsterName: Knight
   description: 
   sprite: {fileID: 0}
+  currentHealth: 25
+  maxHealth: 25
+  currentArmor: 20
+  maxArmor: 20
+  criticalChance: 5
   strength: 10
   toughness: 10
   speed: 10
