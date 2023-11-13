@@ -140,6 +140,7 @@ public class BattleSystem : MonoBehaviour
                     PlayerMove();
                     break;
                 case 1:
+                    Application.Quit();
                     Debug.Log("Running from battle");
                     break;
                 default: break;

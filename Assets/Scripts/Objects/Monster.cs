@@ -27,7 +27,7 @@ public class Monster : ScriptableObject
     public Sprite Sprite { get { return sprite; } }
     public int Health { get {  return maxHealth; } }
     public int Armor { get {  return maxArmor; } }
-    public int Strength { get {  return toughness; } }
+    public int Strength { get {  return strength; } }
     public int Toughness { get {  return toughness; } }
     public int Speed { get { return speed; } }
     public List<Abilities> Abilities { get { return abilities; } }

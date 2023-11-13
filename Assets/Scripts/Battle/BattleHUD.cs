@@ -11,8 +11,8 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] HPBar hpBar;
     [SerializeField] ARBar arBar;
     [SerializeField] bool isPlayer;
-    [SerializeField] TMP_Text currentMaxHP;
-    [SerializeField] TMP_Text currentMaxAR;
+    [SerializeField] TMP_Text currentMaxHP = null;
+    [SerializeField] TMP_Text currentMaxAR = null;
 
     [SerializeField] MonsterManager monster;
 
@@ -36,10 +36,13 @@ public class BattleHUD : MonoBehaviour
 
     public void UpdateAR()
     {
-        arBar.SetAR((float)monster.AR / (float)monster.MaxArmor);
-        if (isPlayer)
+        if (monster.MaxArmor > 0)
         {
-            currentMaxAR.SetText(monster.AR + "/" + monster.MaxArmor);
+            arBar.SetAR((float)monster.AR / (float)monster.MaxArmor);
+            if (isPlayer)
+            {
+                currentMaxAR.SetText(monster.AR + "/" + monster.MaxArmor);
+            }
         }
     }
 

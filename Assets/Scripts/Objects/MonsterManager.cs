@@ -39,6 +39,8 @@ public class MonsterManager
     public bool TakeDamage(MonsterManager attacker)
     {
         int damage = Mathf.FloorToInt(attacker.Stats.Strength * Random.Range(0.9f, 1f));
+        Debug.Log(attacker.Stats.Strength);
+        Debug.Log(damage);
         if (AR > 0)
         {
             AR -= damage;
