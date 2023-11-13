@@ -24,6 +24,7 @@ public class BattleSystem : MonoBehaviour
 
     BattleState state;
     int currentAction;
+    int currentMove;
 
     private void Start()
     {
@@ -63,7 +64,45 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
-        currentAction = 0;
+        currentMove = 0;
+    }
+
+    IEnumerator PerformPlayerAttack()
+    {
+        state = BattleState.Attacking;
+        yield return dialogBox.TypeDialog($"You attack");
+        yield return new WaitForSeconds(1);
+
+        bool isDefeated = monsterUnit.Monster.TakeDamage(playerUnit.Monster);
+        monsterHUD.UpdateAR();
+        monsterHUD.UpdateHP();
+        if (isDefeated)
+        {
+            yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Stats.Name} has been Defeated");
+        }
+        else
+        {
+            StartCoroutine(EnemyMove());
+        }
+    }
+
+    IEnumerator EnemyMove()
+    {
+        state = BattleState.EnemyMove;
+        yield return dialogBox.TypeDialog("Slime used Tackle");
+        yield return new WaitForSeconds(1);
+        playerHUD.UpdateHP();
+        playerHUD.UpdateAR();
+        bool isDefeated = playerUnit.Monster.TakeDamage(monsterUnit.Monster);
+        if (isDefeated)
+        {
+            yield return dialogBox.TypeDialog("You have been Defeated");
+        }
+        else
+        {
+            PlayerAction();
+        }
+
     }
 
     private void Update()
@@ -110,24 +149,27 @@ public class BattleSystem : MonoBehaviour
     private void HandleMoveSelection()
     {
         if (Input.GetKeyDown(KeyCode.S)) {
-            if (currentAction < 3)
-                ++currentAction;
+            if (currentMove < 3)
+                ++currentMove;
         }
 
         else if (Input.GetKeyDown(KeyCode.W)) { 
-            if (currentAction > 0)
+            if (currentMove > 0)
             {
-                --currentAction;
+                --currentMove;
             }
         }
 
-        dialogBox.UpdateMoveSelection(currentAction, playerUnit.Monster);
+        dialogBox.UpdateMoveSelection(currentMove, playerUnit.Monster);
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.Space)) {
-            switch (currentAction)
+            switch (currentMove)
             {
                 case 0:
                     Debug.Log("Attack");
+                    dialogBox.EnableMoveSelector(false);
+                    dialogBox.EnableDialogText(true);
+                    StartCoroutine(PerformPlayerAttack());
                     break;
                 case 1:
                     Debug.Log("Select Ability");

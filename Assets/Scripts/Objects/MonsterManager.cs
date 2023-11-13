@@ -33,6 +33,30 @@ public class MonsterManager
     public int MaxArmor { get { if (Stats.Armor <= 0) return 0; return Mathf.FloorToInt(Stats.Toughness) + 10; } }
     public float CritRate {  get { return Stats.Speed * 0.5f; } }
 
-    public string BasicAttack { get { return $"Basic attack. Deals {Mathf.FloorToInt(Stats.Strength)} AR damage and {Mathf.FloorToInt(Stats.Strength * 0.5f)} HP damage to armored enemies. {Mathf.FloorToInt(Stats.Strength)} HP damage otherwise."; } }
+    public int BasicAttack { get { return Mathf.FloorToInt(Stats.Strength); } }
     public string BasicAttackDescription { get { return $"Basic attack. Deals {Mathf.FloorToInt(Stats.Strength)} AR damage and {Mathf.FloorToInt(Stats.Strength * 0.5f)} HP damage to armored enemies. {Mathf.FloorToInt(Stats.Strength)} HP damage otherwise."; } }
+
+    public bool TakeDamage(MonsterManager attacker)
+    {
+        int damage = Mathf.FloorToInt(attacker.Stats.Strength * Random.Range(0.9f, 1f));
+        if (AR > 0)
+        {
+            AR -= damage;
+            if (AR <= 0)
+            {
+                AR = 0;
+            }
+        }
+        else
+        {
+            HP -= damage;
+            if (HP <= 0)
+            {
+                HP = 0;
+                return true;
+            }
+        }
+        return false;
+
+    }
 }
