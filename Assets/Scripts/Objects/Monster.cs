@@ -5,24 +5,39 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Monster", menuName = "Unknown/Create new monster")]
 public class Monster : ScriptableObject
 {
-    public string monsterName;
+    [SerializeField] string monsterName;
 
     [TextArea]
-    public string description;
+    [SerializeField] string description;
 
-    public Sprite sprite;
+    [SerializeField] Sprite sprite;
 
-    public int currentHealth;
-    public int maxHealth;
-    public int currentArmor;
-    public int maxArmor;
-    public float criticalChance;
-    
+    [SerializeField] int maxHealth;
+    [SerializeField] int maxArmor;
+
     // Base Stats
-    public int strength;
-    public int toughness;
-    public int speed;
+    [SerializeField] int strength;
+    [SerializeField] int toughness;
+    [SerializeField] int speed;
+    [SerializeField] List<Abilities> abilities;
 
-    public List<Abilities> abilities;
-    public List<Items> items;
+    public string Name { get { return monsterName; } }
+    public string Description { get { return description; } }
+    public Sprite Sprite { get { return sprite; } }
+    public int Health { get {  return maxHealth; } }
+    public int Armor { get {  return maxArmor; } }
+    public int Strength { get {  return toughness; } }
+    public int Toughness { get {  return toughness; } }
+    public int Speed { get { return speed; } }
+    public List<Abilities> Abilities { get { return abilities; } }
+    //public List<LearnableAbility > LearnableAbilities { get { return learnableAbilities; } }
+}
+
+public class LearnableAbility
+{
+    [SerializeField] Abilities ability;
+    [SerializeField] int level;
+
+    public Abilities Ability {  get { return ability;} }
+    public int Level { get { return level; } }
 }

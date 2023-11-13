@@ -15,5 +15,7 @@ MonoBehaviour:
   abilityName: Smash
   description: Deals significant damage
   effect: {fileID: 0}
-  cooldown: 2
+  powerAgainstHP: 2
+  powerAgainstArmor: 0.75
+  cooldown: 0
   abilityType: 0
