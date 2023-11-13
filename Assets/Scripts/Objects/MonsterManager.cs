@@ -30,6 +30,9 @@ public class MonsterManager
     }
 
     public int MaxHealth { get { return Mathf.FloorToInt(Stats.Toughness * 1.5f) + 10; } }
-    public int MaxArmor { get { if (Stats.Armor < 0) return 0; return Mathf.FloorToInt(Stats.Toughness) + 10; } }
+    public int MaxArmor { get { if (Stats.Armor <= 0) return 0; return Mathf.FloorToInt(Stats.Toughness) + 10; } }
     public float CritRate {  get { return Stats.Speed * 0.5f; } }
+
+    public string BasicAttack { get { return $"Basic attack. Deals {Mathf.FloorToInt(Stats.Strength)} AR damage and {Mathf.FloorToInt(Stats.Strength * 0.5f)} HP damage to armored enemies. {Mathf.FloorToInt(Stats.Strength)} HP damage otherwise."; } }
+    public string BasicAttackDescription { get { return $"Basic attack. Deals {Mathf.FloorToInt(Stats.Strength)} AR damage and {Mathf.FloorToInt(Stats.Strength * 0.5f)} HP damage to armored enemies. {Mathf.FloorToInt(Stats.Strength)} HP damage otherwise."; } }
 }
