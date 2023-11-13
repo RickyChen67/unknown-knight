@@ -39,7 +39,6 @@ public class BattleHUD : MonoBehaviour
         arBar.SetAR((float)monster.AR / (float)monster.MaxArmor);
         if (isPlayer)
         {
-            currentMaxHP.SetText(monster.HP + "/" + monster.MaxHealth);
             currentMaxAR.SetText(monster.AR + "/" + monster.MaxArmor);
         }
     }
@@ -50,7 +49,6 @@ public class BattleHUD : MonoBehaviour
         if (isPlayer)
         {
             currentMaxHP.SetText(monster.HP + "/" + monster.MaxHealth);
-            currentMaxAR.SetText(monster.AR + "/" + monster.MaxArmor);
         }
     }
 }
