@@ -74,8 +74,8 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         bool isDefeated = monsterUnit.Monster.TakeDamage(playerUnit.Monster);
-        monsterHUD.UpdateAR();
         monsterHUD.UpdateHP();
+        monsterHUD.UpdateAR();
         if (isDefeated)
         {
             yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Stats.Name} has been Defeated");
@@ -91,9 +91,10 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.EnemyMove;
         yield return dialogBox.TypeDialog("Slime used Tackle");
         yield return new WaitForSeconds(1);
+        
+        bool isDefeated = playerUnit.Monster.TakeDamage(monsterUnit.Monster);
         playerHUD.UpdateHP();
         playerHUD.UpdateAR();
-        bool isDefeated = playerUnit.Monster.TakeDamage(monsterUnit.Monster);
         if (isDefeated)
         {
             yield return dialogBox.TypeDialog("You have been Defeated");
