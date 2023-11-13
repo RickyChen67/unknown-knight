@@ -15,5 +15,7 @@ MonoBehaviour:
   abilityName: Trip
   description: Trips the opponent. Resisted by armor.
   effect: {fileID: 0}
-  cooldown: 3
+  powerAgainstHP: 1
+  powerAgainstArmor: 0.5
+  cooldown: 0
   abilityType: 0
