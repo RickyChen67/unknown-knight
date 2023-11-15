@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: Green Slime
   description: 
-  sprite: {fileID: 4557467248702983155, guid: c80534141f80d28489b1ef92f8ff7d99, type: 3}
+  sprite: {fileID: 469887860811983759, guid: c80534141f80d28489b1ef92f8ff7d99, type: 3}
   maxHealth: 25
   maxArmor: 0
   strength: 15
   toughness: 20
   speed: 5
-  abilities:
-  - {fileID: 11400000, guid: 08c6e5bd2b6fd67498f717040b4d0e7b, type: 2}
-  - {fileID: 11400000, guid: 41d02714bd7310947b76fec705734b2f, type: 2}
+  abilities: []

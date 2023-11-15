@@ -26,6 +26,7 @@ public class BattleSystem : MonoBehaviour
     int currentAction;
     int currentMove;
     bool defended;
+    int playerActions;
 
     private void Start()
     {
@@ -38,7 +39,10 @@ public class BattleSystem : MonoBehaviour
         monsterUnit.SetUp();
         playerHUD.SetData(playerUnit.Monster);
         monsterHUD.SetData(monsterUnit.Monster);
-        
+
+        dialogBox.EnableDialogText(true);
+        dialogBox.EnableActionSelector(false);
+        dialogBox.EnableMoveSelector(false);
         //dialogBox.SetDialog($"You encountered a {monsterUnit.Monster.Stats.Name}.");
         yield return dialogBox.TypeDialog($"You encountered a {monsterUnit.Monster.Stats.Name}.");
         yield return new WaitForSeconds(1);
