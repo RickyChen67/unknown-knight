@@ -28,6 +28,8 @@ public class BattleSystem : MonoBehaviour
     bool defended;
     int playerActions;
 
+    List<BattleUnit> turnOrder = new List<BattleUnit>(2);
+
     private void Start()
     {
         StartCoroutine(SetupBattle());
@@ -43,6 +45,18 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableDialogText(true);
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableMoveSelector(false);
+
+        if (playerUnit.Monster.Stats.Speed > monsterUnit.Monster.Stats.Speed)
+        {
+            turnOrder.Add(playerUnit);
+            turnOrder.Add(monsterUnit);
+        }
+        else
+        {
+            turnOrder.Add(monsterUnit);
+            turnOrder.Add(playerUnit);
+        }
+
         //dialogBox.SetDialog($"You encountered a {monsterUnit.Monster.Stats.Name}.");
         yield return dialogBox.TypeDialog($"You encountered a {monsterUnit.Monster.Stats.Name}.");
         yield return new WaitForSeconds(1);

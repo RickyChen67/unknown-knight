@@ -26313,7 +26313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ccc947b2d6385459b1e1046ff959bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterBase: {fileID: 11400000, guid: ba9e9e486eeae2b4eb0fc4c9e8dfef78, type: 2}
+  monsterBase: {fileID: 11400000, guid: 558d4c64372246242b40d71bff54a697, type: 2}
   level: 5
   isPlayer: 0
 --- !u!114 &2077690691
