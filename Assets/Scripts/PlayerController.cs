@@ -7,54 +7,20 @@ using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerInput inputReader;
-    private InputAction inputAction;
-    private Vector2 movement;
     [SerializeField] private Animator animator;
-    [SerializeField] private float collisionRadius = 0.1f;
-
-    [SerializeField] private float speed = 1f;
+    
     private Vector2 input;
     private bool moving;
+    [SerializeField] private float speed = 1f;
+
+    [SerializeField] private float collisionRadius = 0.1f;
     [SerializeField] private LayerMask solidObjectsLayer;
     [SerializeField] private LayerMask randomEncounterLayer;
-
-    //private void Awake()
-    //{
-    //    inputAction = inputReader.actions["Movement"];
-    //}
-
-    //private void OnEnable()
-    //{
-    //    inputAction.Enable();
-    //    inputAction.performed += PlayerMove;
-    //    inputAction.canceled += PlayerIdle;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    inputAction.Disable();
-    //    inputAction.performed -= PlayerMove;
-    //    inputAction.canceled -= PlayerIdle;
-    //}
-
-    //private void PlayerMove(InputAction.CallbackContext ctx)
-    //{
-    //    movement = ctx.ReadValue<Vector2>();
-    //}
-
-    //private void PlayerIdle(InputAction.CallbackContext ctx)
-    //{
-    //    movement = Vector2.zero;
-    //}
-
 
     private void Update()
     {
         if (!moving)
         {
-            //input.x = movement.x;
-            //input.y = movement.y;
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
 
