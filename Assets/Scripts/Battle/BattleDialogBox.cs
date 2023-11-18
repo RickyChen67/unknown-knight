@@ -19,6 +19,7 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] List<TMP_Text> abilityTexts;
     [SerializeField] List<TMP_Text> itemTexts;
 
+    [SerializeField] TMP_Text actionDescription;
     [SerializeField] TMP_Text moveDescription;
     [SerializeField] TMP_Text abilityDescription;
     [SerializeField] TMP_Text itemDescription;
@@ -40,6 +41,18 @@ public class BattleDialogBox : MonoBehaviour
         }
     }
 
+    public IEnumerator TypeActionDialog()
+    {
+        string dialogString = "";
+        actionDescription.SetText(dialogString);
+        foreach (var letter in "Select an action".ToCharArray())
+        {
+            dialogString += letter;
+            actionDescription.SetText(dialogString);
+            yield return new WaitForSeconds(1f/ dialogSpeed);
+        }
+    }
+
     public void EnableDialogText(bool enabled)
     {
         dialogText.enabled = enabled;
@@ -48,6 +61,7 @@ public class BattleDialogBox : MonoBehaviour
     public void EnableActionSelector(bool enabled)
     {
         actionSelector.SetActive(enabled);
+        actionDescription.enabled = enabled;
     }
     public void EnableMoveSelector(bool enabled)
     {
@@ -97,10 +111,12 @@ public class BattleDialogBox : MonoBehaviour
             moveDescription.fontSize = fontSize;
             moveDescription.enableAutoSizing = false;
             if (selectedAction == 1)
-                moveDescription.SetText("Use an Ability");
+                moveDescription.SetText(player.DefendDescription);
             else if (selectedAction == 2)
-                moveDescription.SetText("Use an Item");
+                moveDescription.SetText("Use an Ability");
             else if (selectedAction == 3)
+                moveDescription.SetText("Use an Item");
+            else if (selectedAction == 4)
                 moveDescription.SetText("Go Back");
         }
     }

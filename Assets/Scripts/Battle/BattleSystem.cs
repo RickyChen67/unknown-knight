@@ -25,6 +25,10 @@ public class BattleSystem : MonoBehaviour
     BattleState state;
     int currentAction;
     int currentMove;
+    bool defended;
+    int playerActions;
+
+    List<BattleUnit> turnOrder = new List<BattleUnit>(2);
 
     private void Start()
     {
@@ -37,7 +41,22 @@ public class BattleSystem : MonoBehaviour
         monsterUnit.SetUp();
         playerHUD.SetData(playerUnit.Monster);
         monsterHUD.SetData(monsterUnit.Monster);
-        
+
+        dialogBox.EnableDialogText(true);
+        dialogBox.EnableActionSelector(false);
+        dialogBox.EnableMoveSelector(false);
+
+        if (playerUnit.Monster.Stats.Speed > monsterUnit.Monster.Stats.Speed)
+        {
+            turnOrder.Add(playerUnit);
+            turnOrder.Add(monsterUnit);
+        }
+        else
+        {
+            turnOrder.Add(monsterUnit);
+            turnOrder.Add(playerUnit);
+        }
+
         //dialogBox.SetDialog($"You encountered a {monsterUnit.Monster.Stats.Name}.");
         yield return dialogBox.TypeDialog($"You encountered a {monsterUnit.Monster.Stats.Name}.");
         yield return new WaitForSeconds(1);
@@ -47,35 +66,58 @@ public class BattleSystem : MonoBehaviour
 
     private void PlayerAction()
     {
+        if (defended)
+        {
+            playerUnit.Monster.PostDefend();
+            defended = false;
+            playerHUD.UpdateAR();
+        }
+
         currentAction = 0;
         state = BattleState.PlayerAction;
-        dialogBox.EnableDialogText(true);
+        dialogBox.EnableDialogText(false);
         dialogBox.EnableActionSelector(true);
         dialogBox.EnableMoveSelector(false);
         //dialogBox.EnableAbilitySelector(false);
         //dialogBox.EnableItemSelector(false);
 
-        StartCoroutine(dialogBox.TypeDialog("Select an action"));
+        StartCoroutine(dialogBox.TypeActionDialog());
     }
 
     private void PlayerMove()
     {
+        currentMove = 0;
         state = BattleState.PlayerMove;
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
-        currentMove = 0;
     }
 
-    IEnumerator PerformPlayerAttack()
+    IEnumerator PerformPlayerAttack(int action)
     {
         state = BattleState.Attacking;
-        yield return dialogBox.TypeDialog($"You attack");
+        if (action == 0)
+        {
+            yield return dialogBox.TypeDialog($"You attack");
+        }
+        else if (action == 1)
+        {
+            defended = true;
+            yield return dialogBox.TypeDialog($"You defend");
+        }
         yield return new WaitForSeconds(1);
 
-        bool isDefeated = monsterUnit.Monster.TakeDamage(playerUnit.Monster);
+        bool isDefeated = false;
+        if (action == 0)
+            isDefeated = monsterUnit.Monster.TakeDamage(playerUnit.Monster);
+        else if (action == 1)
+        {
+            playerUnit.Monster.DefendAction();
+            playerHUD.UpdateAR();
+        }
         monsterHUD.UpdateHP();
         monsterHUD.UpdateAR();
+
         if (isDefeated)
         {
             yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Stats.Name} has been Defeated");
@@ -89,7 +131,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyMove()
     {
         state = BattleState.EnemyMove;
-        yield return dialogBox.TypeDialog("Slime used Tackle");
+        yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Stats.Name} used Tackle");
         yield return new WaitForSeconds(1);
         
         bool isDefeated = playerUnit.Monster.TakeDamage(monsterUnit.Monster);
@@ -151,7 +193,7 @@ public class BattleSystem : MonoBehaviour
     private void HandleMoveSelection()
     {
         if (Input.GetKeyDown(KeyCode.S)) {
-            if (currentMove < 3)
+            if (currentMove < 4)
                 ++currentMove;
         }
 
@@ -171,19 +213,29 @@ public class BattleSystem : MonoBehaviour
                     Debug.Log("Attack");
                     dialogBox.EnableMoveSelector(false);
                     dialogBox.EnableDialogText(true);
-                    StartCoroutine(PerformPlayerAttack());
+                    StartCoroutine(PerformPlayerAttack(0));
                     break;
                 case 1:
-                    Debug.Log("Select Ability");
+                    Debug.Log("Defend");
+                    dialogBox.EnableMoveSelector(false);
+                    dialogBox.EnableDialogText(true);
+                    StartCoroutine(PerformPlayerAttack(1));
                     break;
                 case 2:
-                    Debug.Log("Select Item");
+                    Debug.Log("Select Ability");
                     break;
                 case 3:
+                    Debug.Log("Select Item");
+                    break;
+                case 4:
                     PlayerAction();
                     break;
                 default: break;
             }
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            PlayerAction();
         }
     }
 }

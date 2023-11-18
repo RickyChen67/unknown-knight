@@ -38,7 +38,15 @@ public class BattleHUD : MonoBehaviour
     {
         if (monster.MaxArmor > 0)
         {
-            arBar.SetAR((float)monster.AR / (float)monster.MaxArmor);
+            if (monster.AR > monster.MaxArmor)
+            {
+                arBar.SetAR(1);
+            }
+            else
+            {
+                arBar.SetAR((float)monster.AR / (float)monster.MaxArmor);
+            }
+
             if (isPlayer)
             {
                 currentMaxAR.SetText(monster.AR + "/" + monster.MaxArmor);

@@ -11,6 +11,7 @@ public class MonsterManager
     public int HP { get; set; }
     public int AR { get; set; }
     public List<AbilityManager> AbilityList { get; set; }
+    public int defendAR;
 
     public MonsterManager(Monster _stats, int _level)
     {
@@ -34,11 +35,14 @@ public class MonsterManager
     public float CritRate {  get { return Stats.Speed * 0.5f; } }
 
     public int BasicAttack { get { return Mathf.FloorToInt(Stats.Strength); } }
-    public string BasicAttackDescription { get { return $"Basic attack. Deals {Mathf.FloorToInt(Stats.Strength)} AR damage and {Mathf.FloorToInt(Stats.Strength * 0.5f)} HP damage to armored enemies. {Mathf.FloorToInt(Stats.Strength)} HP damage otherwise."; } }
+    public string BasicAttackDescription { get { return $"Basic attack. Deals {BasicAttack} AR damage and {Mathf.FloorToInt(BasicAttack * 0.5f)} HP damage to armored enemies, {BasicAttack} HP damage otherwise"; } }
+
+    public int Defend {  get { return Mathf.FloorToInt(MaxArmor * 0.5f);  } }
+    public string DefendDescription {  get { return $"Raise up your shield and gain {Defend} temporary AR";  } }
 
     public bool TakeDamage(MonsterManager attacker)
     {
-        int damage = Mathf.FloorToInt(attacker.Stats.Strength * Random.Range(0.9f, 1f));
+        int damage = Mathf.FloorToInt(attacker.BasicAttack * Random.Range(0.9f, 1f));
         Debug.Log(attacker.Stats.Strength);
         Debug.Log(damage);
         if (AR > 0)
@@ -59,6 +63,24 @@ public class MonsterManager
             }
         }
         return false;
+    }
 
+    public void DefendAction()
+    {
+        defendAR = AR;
+        AR += Defend;
+        Debug.Log(AR);
+    }
+
+    public void PostDefend()
+    {
+        if (AR > 0 && defendAR < AR)
+        {
+            AR -= Defend;
+            if (AR <= 0)
+            {
+                AR = 0;
+            }
+        }
     }
 }

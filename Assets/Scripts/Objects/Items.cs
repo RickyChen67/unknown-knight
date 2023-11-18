@@ -18,4 +18,5 @@ public class Items : ScriptableObject
 
     public Sprite sprite;
     public ItemType itemType;
+    public StatusEffect statusEffect;
 }
