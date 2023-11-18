@@ -13,12 +13,6 @@ public enum AbilityType
 
 }
 
-public enum StatusEffect
-{
-
-}
-
-[CreateAssetMenu(fileName = "Ability", menuName = "Unknown/Create new ability")]
 public class Abilities : ScriptableObject
 {
     [SerializeField] string abilityName;

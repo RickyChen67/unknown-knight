@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Monster", menuName = "Unknown/Create new monster")]
 public class Monster : ScriptableObject
 {
     [SerializeField] string monsterName;
@@ -20,7 +19,6 @@ public class Monster : ScriptableObject
     [SerializeField] int toughness;
     [SerializeField] int speed;
     [SerializeField] List<Abilities> abilities;
-    [SerializeField] List<LearnableAbility> learnableAbilities;
 
     public string Name { get { return monsterName; } }
     public string Description { get { return description; } }
@@ -31,14 +29,4 @@ public class Monster : ScriptableObject
     public int Toughness { get {  return toughness; } }
     public int Speed { get { return speed; } }
     public List<Abilities> Abilities { get { return abilities; } }
-    public List<LearnableAbility> LearnableAbilities { get { return learnableAbilities; } }
-}
-
-public class LearnableAbility
-{
-    [SerializeField] Abilities ability;
-    [SerializeField] int level;
-
-    public Abilities Ability {  get { return ability;} }
-    public int Level { get { return level; } }
 }

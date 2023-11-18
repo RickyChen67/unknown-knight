@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd82734683ebe844ae3915694da4f9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c4207b917c51954787e63ae5f3ab4c0, type: 3}
   m_Name: BlueSlime
   m_EditorClassIdentifier: 
   monsterName: Blue Slime
   description: 
-  sprite: {fileID: -99518741711876278, guid: bfeede70efd14484683f5956b4f1194b, type: 3}
-  maxHealth: 25
-  maxArmor: 40
-  strength: 10
-  toughness: 25
+  monster: {fileID: 0}
+  hasArmor: 0
+  level: 5
+  strength: 15
+  toughness: 20
   speed: 5
   abilities: []
