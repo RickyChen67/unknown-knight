@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c63b805c0ad07e449eea91929ccf533, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b089d4f27cf95c4498cd0613772b10b, type: 3}
   m_Name: Smash
   m_EditorClassIdentifier: 
-  abilityName: Smash
-  description: Deals significant damage
+  abilityName: 
+  description: 
   effect: {fileID: 0}
-  powerAgainstHP: 2
-  powerAgainstArmor: 0.75
+  damageAgainstHP: 0
+  damageAgainstArmor: 0
+  actions: 0
   cooldown: 0
-  abilityType: 0
+  statusEffect: 0
