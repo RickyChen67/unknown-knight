@@ -120,9 +120,4 @@ public class BattleDialogBox : MonoBehaviour
                 moveDescription.SetText("Go Back");
         }
     }
-
-    public void SetAbilityNames(List<Abilities> abilities)
-    {
-
-    }
 }
