@@ -20,5 +20,5 @@ public class Player
 
     public int RemainingStatPoints { get { return  (Stats.Level * 2 + 30) - (Stats.Strength + Stats.Toughness + Stats.Speed);  } }
 
-    public List<AbilityObject> Abilities { get {  return Stats.Abilities; } }
+    public List<Ability> Abilities { get {  return Stats.Abilities; } }
 }

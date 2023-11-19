@@ -18,7 +18,6 @@ public class Monster : ScriptableObject
     [SerializeField] int strength;
     [SerializeField] int toughness;
     [SerializeField] int speed;
-    [SerializeField] List<Abilities> abilities;
 
     public string Name { get { return monsterName; } }
     public string Description { get { return description; } }
@@ -28,5 +27,4 @@ public class Monster : ScriptableObject
     public int Strength { get {  return strength; } }
     public int Toughness { get {  return toughness; } }
     public int Speed { get { return speed; } }
-    public List<Abilities> Abilities { get { return abilities; } }
 }

@@ -10,7 +10,6 @@ public class MonsterManager
 
     public int HP { get; set; }
     public int AR { get; set; }
-    public List<AbilityManager> AbilityList { get; set; }
     public int defendAR;
 
     public MonsterManager(Monster _stats, int _level)
@@ -21,13 +20,13 @@ public class MonsterManager
         HP = MaxHealth;
         AR = MaxArmor;
 
-        AbilityList = new List<AbilityManager>();
-        foreach (var ability in _stats.Abilities)
-        {
-            AbilityList.Add(new AbilityManager(ability));
-            //if (ability.Level <= level)
-            //    AbilityList.Add(new AbilityManager(ability.Ability));
-        }
+        //AbilityList = new List<AbilityManager>();
+        //foreach (var ability in _stats.Abilities)
+        //{
+        //    AbilityList.Add(new AbilityManager(ability));
+        //    //if (ability.Level <= level)
+        //    //    AbilityList.Add(new AbilityManager(ability.Ability));
+        //}
     }
 
     public int MaxHealth { get { return Mathf.FloorToInt(Stats.Toughness * 1.5f) + 10; } }
