@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum BattleState
 {
@@ -21,6 +23,9 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleUnit monsterUnit;
     [SerializeField] BattleHUD monsterHUD;
     [SerializeField] BattleDialogBox dialogBox;
+    [SerializeField] Image backgroundImage = null;
+
+    public event Action<bool> OnBattleEnd;
 
     BattleState state;
     int currentAction;
@@ -46,7 +51,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableMoveSelector(false);
 
-        if (playerUnit.Monster.Stats.Speed > monsterUnit.Monster.Stats.Speed)
+        if (playerUnit.Monster.Monster.Speed > monsterUnit.Monster.Monster.Speed)
         {
             turnOrder.Add(playerUnit);
             turnOrder.Add(monsterUnit);
@@ -58,7 +63,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         //dialogBox.SetDialog($"You encountered a {monsterUnit.Monster.Stats.Name}.");
-        yield return dialogBox.TypeDialog($"You encountered a {monsterUnit.Monster.Stats.Name}.");
+        yield return dialogBox.TypeDialog($"You encountered a {monsterUnit.Monster.Monster.Name}.");
         yield return new WaitForSeconds(1);
 
         PlayerAction();
@@ -66,13 +71,6 @@ public class BattleSystem : MonoBehaviour
 
     private void PlayerAction()
     {
-        if (defended)
-        {
-            playerUnit.Monster.PostDefend();
-            defended = false;
-            playerHUD.UpdateAR();
-        }
-
         currentAction = 0;
         state = BattleState.PlayerAction;
         dialogBox.EnableDialogText(false);
@@ -99,6 +97,7 @@ public class BattleSystem : MonoBehaviour
         if (action == 0)
         {
             yield return dialogBox.TypeDialog($"You attack");
+            monsterUnit.Hurt();
         }
         else if (action == 1)
         {
@@ -109,18 +108,24 @@ public class BattleSystem : MonoBehaviour
 
         bool isDefeated = false;
         if (action == 0)
+        {
             isDefeated = monsterUnit.Monster.TakeDamage(playerUnit.Monster);
+        }
         else if (action == 1)
         {
             playerUnit.Monster.DefendAction();
-            playerHUD.UpdateAR();
+            yield return playerHUD.UpdateAR();
         }
-        monsterHUD.UpdateHP();
-        monsterHUD.UpdateAR();
+        yield return monsterHUD.UpdateHP();
+        yield return monsterHUD.UpdateAR();
 
         if (isDefeated)
         {
-            yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Stats.Name} has been Defeated");
+            monsterUnit.Death();
+            yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Monster.Name} has been Defeated");
+
+            yield return new WaitForSeconds(2);
+            OnBattleEnd(true);
         }
         else
         {
@@ -131,24 +136,35 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyMove()
     {
         state = BattleState.EnemyMove;
-        yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Stats.Name} used Tackle");
+        yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Monster.Name} attacks");
+        monsterUnit.Attack();
         yield return new WaitForSeconds(1);
         
         bool isDefeated = playerUnit.Monster.TakeDamage(monsterUnit.Monster);
-        playerHUD.UpdateHP();
-        playerHUD.UpdateAR();
+        yield return playerHUD.UpdateHP();
+        yield return playerHUD.UpdateAR();
         if (isDefeated)
         {
             yield return dialogBox.TypeDialog("You have been Defeated");
+
+            yield return new WaitForSeconds(2);
+            OnBattleEnd(false);
         }
         else
         {
+            if (defended)
+            {
+                playerUnit.Monster.PostDefend();
+                defended = false;
+                yield return playerHUD.UpdateAR();
+            }
+
             PlayerAction();
         }
 
     }
 
-    private void Update()
+    public void HandleUpdate()
     {
         if (state == BattleState.PlayerAction)
         {
@@ -182,7 +198,8 @@ public class BattleSystem : MonoBehaviour
                     PlayerMove();
                     break;
                 case 1:
-                    Application.Quit();
+                    //Application.Quit();
+                    OnBattleEnd(false);
                     Debug.Log("Running from battle");
                     break;
                 default: break;

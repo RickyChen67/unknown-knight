@@ -19,7 +19,7 @@ public class BattleHUD : MonoBehaviour
     public void SetData(MonsterManager _monster)
     {
         monster = _monster;
-        nameText.SetText(_monster.Stats.Name);
+        nameText.SetText(_monster.Monster.Name);
         levelText.SetText("Lvl " + _monster.Level);
         hpBar.SetHP((float) _monster.HP / (float) _monster.MaxHealth);
         if (_monster.MaxArmor > 0)
@@ -34,17 +34,17 @@ public class BattleHUD : MonoBehaviour
         }
     }
 
-    public void UpdateAR()
+    public IEnumerator UpdateAR()
     {
         if (monster.MaxArmor > 0)
         {
             if (monster.AR > monster.MaxArmor)
             {
-                arBar.SetAR(1);
+                yield return arBar.SetARSmooth(1);
             }
             else
             {
-                arBar.SetAR((float)monster.AR / (float)monster.MaxArmor);
+                yield return arBar.SetARSmooth((float)monster.AR / (float)monster.MaxArmor);
             }
 
             if (isPlayer)
@@ -54,9 +54,9 @@ public class BattleHUD : MonoBehaviour
         }
     }
 
-    public void UpdateHP()
+    public IEnumerator UpdateHP()
     {
-        hpBar.SetHP((float)monster.HP / (float)monster.MaxHealth);
+        yield return hpBar.SetHPSmooth((float)monster.HP / (float)monster.MaxHealth);
         if (isPlayer)
         {
             currentMaxHP.SetText(monster.HP + "/" + monster.MaxHealth);

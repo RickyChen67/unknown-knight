@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: Green Slime
   description: 
-  monster: {fileID: 0}
+  monster: {fileID: -9074539206338946419, guid: c80534141f80d28489b1ef92f8ff7d99, type: 3}
+  animator: {fileID: 9100000, guid: eea59ba63d1a8a24b88693a082eb4329, type: 2}
   hasArmor: 0
   level: 5
   strength: 20
   toughness: 15
   speed: 5
   abilities: []
+  learnableAbilities: []
