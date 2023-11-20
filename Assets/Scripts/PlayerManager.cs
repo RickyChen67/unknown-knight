@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     public TMP_Text Toughness;
     public TMP_Text Speed;
     public TMP_Text Crit;
-    public TMP_Text Abilities;
+    public TMP_Text AbilitiesText;
     public TMP_Text Items;
 
 
@@ -33,8 +33,12 @@ public class PlayerManager : MonoBehaviour
         Toughness.SetText("Toughness: " + player.Stats.Toughness + "");
         Speed.SetText("Speed: " + player.Stats.Speed + "");
         Crit.SetText("Critical Chance: " + player.CritRate + "");
-        Abilities.SetText("" + player.Stats.Abilities[0].Name + "   Cooldown: "+ player.Stats.Abilities[0].Cooldown+"");
-
+        AbilitiesText.SetText("");
+        for (int i = 0; i < player.Stats.Abilities.Count; i++)
+        {
+            
+            AbilitiesText.SetText("" + AbilitiesText.text + "" + player.Stats.Abilities[i].Name + "   Cooldown: " + player.Stats.Abilities[i].Cooldown + "\n");
+        }
 
         //Items.SetText("" + items + " ");
 

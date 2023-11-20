@@ -104915,6 +104915,10 @@ PrefabInstance:
       propertyPath: Toughness
       value: 
       objectReference: {fileID: 628021510}
+    - target: {fileID: 3276540978190350201, guid: 1e873235fec021e4ea3408c47d0a1388, type: 3}
+      propertyPath: AbilitiesText
+      value: 
+      objectReference: {fileID: 1737078449}
     - target: {fileID: 4456088320022936616, guid: 1e873235fec021e4ea3408c47d0a1388, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.8
