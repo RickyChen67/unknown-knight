@@ -10,9 +10,34 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject OptionsMenu;
     [SerializeField] GameObject InventoryMenu;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            bool isActive = pauseMenu.activeSelf;
+
+            pauseMenu.SetActive(!isActive);
+            Time.timeScale = 0f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            bool isActive = InventoryMenu.activeSelf;
+
+            InventoryMenu.SetActive(!isActive);
+            Time.timeScale = 0f;
+        }
+
+    }
     public void Pause()
     {
         pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void Inventory()
+    {
+        InventoryMenu.SetActive(true);
         Time.timeScale = 0f;
     }
     public void Resume()
@@ -68,11 +93,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
     }
 
-    public void Inventory()
-    {
-        InventoryMenu.SetActive(true);
-        Time.timeScale = 0f;
-    }
     public void BackInventory()
     {
 
