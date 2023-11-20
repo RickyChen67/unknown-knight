@@ -41,6 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: World Background
+    uniqueID: 1728273891
+    locked: 0
+  - name: World
+    uniqueID: 3536040337
+    locked: 0
+  - name: RandomEncounterBackground
+    uniqueID: 2624896047
+    locked: 0
+  - name: Back Background
+    uniqueID: 2828244789
+    locked: 0
   - name: Background
     uniqueID: 715634311
     locked: 0
