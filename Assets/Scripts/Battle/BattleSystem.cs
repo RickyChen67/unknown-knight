@@ -35,7 +35,7 @@ public class BattleSystem : MonoBehaviour
 
     List<BattleUnit> turnOrder = new List<BattleUnit>(2);
 
-    private void Start()
+    public void StartBattle()
     {
         StartCoroutine(SetupBattle());
     }
@@ -124,7 +124,7 @@ public class BattleSystem : MonoBehaviour
             monsterUnit.Death();
             yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Monster.Name} has been Defeated");
 
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             OnBattleEnd(true);
         }
         else
@@ -147,7 +147,7 @@ public class BattleSystem : MonoBehaviour
         {
             yield return dialogBox.TypeDialog("You have been Defeated");
 
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             OnBattleEnd(false);
         }
         else

@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
         state = GameState.Battle;
         playerController.gameObject.SetActive(false);
         battleSystem.gameObject.SetActive(true);
+
+        battleSystem.StartBattle();
     }
 
     private void EndBattle(bool battleWon)
