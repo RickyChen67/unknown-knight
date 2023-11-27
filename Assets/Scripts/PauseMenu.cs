@@ -16,17 +16,23 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             bool isActive = pauseMenu.activeSelf;
+            if (isActive)
+                Time.timeScale = 1f;
+            else
+                Time.timeScale = 0f;
 
             pauseMenu.SetActive(!isActive);
-            Time.timeScale = 0f;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             bool isActive = InventoryMenu.activeSelf;
+            if (isActive)
+                Time.timeScale = 1f;
+            else
+                Time.timeScale = 0f;
 
             InventoryMenu.SetActive(!isActive);
-            Time.timeScale = 0f;
         }
 
     }

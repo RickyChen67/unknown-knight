@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private MonsterObject playerObject;
-    private Player player;
+    public MonsterManager PlayerObject { get; set; }
     [SerializeField] private Dictionary<Items, int> items = new Dictionary<Items, int>();
     public TMP_Text Health;
     public TMP_Text Armor;
@@ -22,22 +22,22 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        player = new Player(playerObject);
+        PlayerObject = new MonsterManager(playerObject);
     }
 
     private void Update()
     {
-        Health.SetText("Health: "+player.HP+"");
-        Armor.SetText("Armor: " + player.AR + "");
-        Strength.SetText("Strength: " + player.Stats.Strength + "");
-        Toughness.SetText("Toughness: " + player.Stats.Toughness + "");
-        Speed.SetText("Speed: " + player.Stats.Speed + "");
-        Crit.SetText("Critical Chance: " + player.CritRate + "");
+        Health.SetText("Health: "+ PlayerObject.HP+"");
+        Armor.SetText("Armor: " + PlayerObject.AR + "");
+        Strength.SetText("Strength: " + PlayerObject.Monster.Strength + "");
+        Toughness.SetText("Toughness: " + PlayerObject.Monster.Toughness + "");
+        Speed.SetText("Speed: " + PlayerObject.Monster.Speed + "");
+        Crit.SetText("Critical Chance: " + PlayerObject.CritRate + "");
         AbilitiesText.SetText("");
-        for (int i = 0; i < player.Stats.Abilities.Count; i++)
+        for (int i = 0; i < PlayerObject.Monster.Abilities.Count; i++)
         {
             
-            AbilitiesText.SetText("" + AbilitiesText.text + "" + player.Stats.Abilities[i].Name + "   Cooldown: " + player.Stats.Abilities[i].Cooldown + "\n");
+            AbilitiesText.SetText("" + AbilitiesText.text + "" + PlayerObject.Monster.Abilities[i].Name + "   Cooldown: " + PlayerObject.Monster.Abilities[i].Cooldown + "\n");
         }
 
         //Items.SetText("" + items + " ");

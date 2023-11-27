@@ -35,15 +35,15 @@ public class BattleSystem : MonoBehaviour
 
     List<BattleUnit> turnOrder = new List<BattleUnit>(2);
 
-    public void StartBattle()
+    public void StartBattle(MonsterObject monster)
     {
-        StartCoroutine(SetupBattle());
+        StartCoroutine(SetupBattle(monster));
     }
 
-    public IEnumerator SetupBattle()
+    public IEnumerator SetupBattle(MonsterObject monster)
     {
         playerUnit.SetUp();
-        monsterUnit.SetUp();
+        monsterUnit.SetUp(monster);
         playerHUD.SetData(playerUnit.Monster);
         monsterHUD.SetData(monsterUnit.Monster);
 
@@ -66,7 +66,10 @@ public class BattleSystem : MonoBehaviour
         yield return dialogBox.TypeDialog($"You encountered a {monsterUnit.Monster.Monster.Name}.");
         yield return new WaitForSeconds(1);
 
-        PlayerAction();
+        if (playerUnit.Monster.Monster.Speed >= monsterUnit.Monster.Monster.Speed)
+            PlayerAction();
+        else
+            StartCoroutine(EnemyMove());
     }
 
     private void PlayerAction()

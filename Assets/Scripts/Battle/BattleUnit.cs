@@ -5,24 +5,26 @@ using UnityEngine.UI;
 
 public class BattleUnit : MonoBehaviour
 {
-    [SerializeField] MonsterObject monster;
+    [SerializeField] GameObject player;
     [SerializeField] int level;
     [SerializeField] bool isPlayer;
     [SerializeField] Animator animator;
 
     public MonsterManager Monster { get; set; }
 
-    public void SetUp()
+    public void SetUp(MonsterObject _monster = null)
     {
         //level = Monster.Monster.Level;
-        Monster = new MonsterManager(monster, level);
         if (!isPlayer)
         {
+            Monster = new MonsterManager(_monster, level);
             GetComponent<Image>().enabled = true;
             GetComponent<Image>().sprite = Monster.Monster.Monster;
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = Monster.Monster.Animator;
         }
+        else
+            Monster = player.GetComponent<PlayerManager>().PlayerObject;
     }
 
     public void Attack()

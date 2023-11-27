@@ -12,7 +12,7 @@ public class MonsterManager
     public int AR { get; set; }
     public int defendAR;
 
-    public MonsterManager(MonsterObject _stats, int _level)
+    public MonsterManager(MonsterObject _stats, int _level = 1)
     {
         Monster = _stats;
         Level = _level;

@@ -15,13 +15,13 @@ public class GameController : MonoBehaviour
         battleSystem.OnBattleEnd += EndBattle;
     }
 
-    private void StartBattle()
+    private void StartBattle(MonsterObject monster)
     {
         state = GameState.Battle;
         playerController.gameObject.SetActive(false);
         battleSystem.gameObject.SetActive(true);
 
-        battleSystem.StartBattle();
+        battleSystem.StartBattle(monster);
     }
 
     private void EndBattle(bool battleWon)
