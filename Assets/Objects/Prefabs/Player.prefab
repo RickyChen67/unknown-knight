@@ -233,7 +233,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -738845957
-  m_SortingLayer: 4
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 2121284158, guid: da6006ffb3338124fb0dfcac7fe9de48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -279,4 +279,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333db69bf05707d489dbb03cc7ed7c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 11400000, guid: e9481e9d9725cdf48aadf3ffe82e55ed, type: 2}
+  playerObject: {fileID: 11400000, guid: 94225fbc7ab228241af93b4964b38d3b, type: 2}
+  Health: {fileID: 0}
+  Armor: {fileID: 0}
+  Strength: {fileID: 0}
+  Toughness: {fileID: 0}
+  Speed: {fileID: 0}
+  Crit: {fileID: 0}
+  AbilitiesText: {fileID: 0}
+  Items: {fileID: 0}

@@ -15,19 +15,11 @@ MonoBehaviour:
   monsterName: Knight
   description: 
   monster: {fileID: 0}
+  animator: {fileID: 0}
   hasArmor: 1
   level: 1
   strength: 10
   toughness: 10
   speed: 10
-  abilities:
-  - {fileID: 11400000, guid: bac04bbc890397541b7e8f714f2a87cd, type: 2}
-<<<<<<< HEAD
-  learnableAbilities:
-  - ability: {fileID: 0}
-    level: 1
-  - ability: {fileID: 0}
-    level: 1
-=======
+  abilities: []
   learnableAbilities: []
->>>>>>> origin/main

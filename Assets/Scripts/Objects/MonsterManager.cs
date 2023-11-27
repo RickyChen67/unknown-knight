@@ -28,7 +28,7 @@ public class MonsterManager
         //    //    AbilityList.Add(new AbilityManager(ability.Ability));
         //}
     }
-
+    
     public int MaxHealth { get { return Mathf.FloorToInt(Monster.Toughness * 1.5f) + 10; } }
     public int MaxArmor { get { if (!Monster.HasArmor) return 0; return Mathf.FloorToInt(Monster.Toughness) + 10; } }
     public float CritRate {  get { return Monster.Speed * 0.5f; } }
