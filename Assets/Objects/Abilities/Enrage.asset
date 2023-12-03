@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a91e0051eb57adf45af3e3374c0b9598, type: 3}
-  m_Name: Rock
+  m_Script: {fileID: 11500000, guid: 6b089d4f27cf95c4498cd0613772b10b, type: 3}
+  m_Name: Enrage
   m_EditorClassIdentifier: 
-  itemName: Rock
-  description: A simple, shiny rock, deals damage to opponent based on strength (strength
-    * 0.5)
-  sprite: {fileID: 0}
-  itemType: 1
+  abilityName: 
+  description: 
+  effect: {fileID: 0}
+  damageAgainstHP: 0
+  damageAgainstArmor: 0
+  actions: 2
+  cooldown: 4
+  statusEffect: 0

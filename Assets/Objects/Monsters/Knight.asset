@@ -17,9 +17,28 @@ MonoBehaviour:
   monster: {fileID: 0}
   animator: {fileID: 0}
   hasArmor: 1
-  level: 1
-  strength: 10
-  toughness: 10
+  level: 10
+  strength: 20
+  toughness: 20
   speed: 10
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: bac04bbc890397541b7e8f714f2a87cd, type: 2}
+  - {fileID: 11400000, guid: c4240a87bb268a04f88caedd4d4805f5, type: 2}
+  - {fileID: 11400000, guid: 1772e17ad8fab704794d4506edea53d1, type: 2}
+  - {fileID: 11400000, guid: 2817e54fd24986e43850dd991a9bb0cd, type: 2}
+  - {fileID: 11400000, guid: 13d4a572f93199647a4460e29f8f66f2, type: 2}
+  - {fileID: 11400000, guid: 8e33bd3eff0643844ae92ef1e1ea0f9b, type: 2}
+  items:
+  - item: {fileID: 11400000, guid: 752dc1527c07ce242a3791eb346eeaeb, type: 2}
+    count: 5
+  - item: {fileID: 11400000, guid: 5b6e2965d527d224dbb65a4e73bf4a5b, type: 2}
+    count: 5
+  - item: {fileID: 11400000, guid: 49eaffd51a179564abd8ed4b6e33b1df, type: 2}
+    count: 3
+  - item: {fileID: 11400000, guid: eb451c3bd10f39e44a99781376c0536c, type: 2}
+    count: 4
+  - item: {fileID: 11400000, guid: 2c673177bc3aaf245b489ce8fb07b3be, type: 2}
+    count: 1
+  - item: {fileID: 11400000, guid: 1500f182f6751034da050d62c48b5eba, type: 2}
+    count: 1
   learnableAbilities: []
