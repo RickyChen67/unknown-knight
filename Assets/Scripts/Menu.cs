@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
     public void PlayGame()
     {
 
-        SceneManager.LoadScene("CloudCity - Ricky");
+        SceneManager.LoadScene("Velder - Cloud City");
     }
     public void Options()
     {

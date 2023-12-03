@@ -17,6 +17,6 @@ MonoBehaviour:
   effect: {fileID: 0}
   damageAgainstHP: 0
   damageAgainstArmor: 0
-  actions: 0
-  cooldown: 0
+  actions: 1
+  cooldown: 3
   statusEffect: 0

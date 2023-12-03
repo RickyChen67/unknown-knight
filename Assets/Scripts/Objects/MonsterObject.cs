@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using UnityEditor.Animations;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Monster", menuName = "Unknown/Create new monster")]
@@ -13,7 +14,8 @@ public class MonsterObject : ScriptableObject
     [TextArea]
     [SerializeField] string description;
 
-    [SerializeField] GameObject monster;  // Needs to change for image/animator
+    [SerializeField] Sprite monster;
+    [SerializeField] AnimatorController animator;
 
     [SerializeField] bool hasArmor;
     [SerializeField] int level;
@@ -24,17 +26,20 @@ public class MonsterObject : ScriptableObject
     [SerializeField] int speed;
 
     [SerializeField] List<Ability> abilities;
+    [SerializeField] List<HoldingItems> items;
     [SerializeField] List<LearnableAbilities> learnableAbilities;
 
     public string Name { get { return monsterName; } }
     public string Description { get { return description; } }
-    public GameObject Monster { get { return monster; } }
+    public Sprite Monster { get { return monster; } }
+    public AnimatorController Animator { get { return animator; } }
     public bool HasArmor { get { return hasArmor; } }
     public int Level { get { return level; } }
     public int Strength { get { return strength; } }
     public int Toughness { get { return toughness; } }
     public int Speed { get { return speed; } }
     public List<Ability> Abilities { get { return abilities; } }
+    public List<HoldingItems> Items { get { return items; } }
     public List<LearnableAbilities> LearnableAbilities { get { return learnableAbilities; } }
 }
 
@@ -43,4 +48,11 @@ public class LearnableAbilities
 {
     public Ability ability;
     public int level;
+}
+
+[Serializable]
+public class HoldingItems
+{
+    public Items item;
+    public int count;
 }
