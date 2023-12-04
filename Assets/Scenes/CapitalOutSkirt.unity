@@ -96401,6 +96401,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc6d4622b7fef6a4b9fc66eee47bbe45, type: 3}
+--- !u!114 &1122900155 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2344716723642435492, guid: bc6d4622b7fef6a4b9fc66eee47bbe45, type: 3}
+  m_PrefabInstance: {fileID: 1122900154}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1122900156 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8057866223667751097, guid: bc6d4622b7fef6a4b9fc66eee47bbe45, type: 3}
+  m_PrefabInstance: {fileID: 1122900154}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1137593648 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8938410459701529937, guid: bc6d4622b7fef6a4b9fc66eee47bbe45, type: 3}
@@ -104892,6 +104914,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1673093028}
     - target: {fileID: 3276540978190350201, guid: 1e873235fec021e4ea3408c47d0a1388, type: 3}
+      propertyPath: Count
+      value: 
+      objectReference: {fileID: 1122900155}
+    - target: {fileID: 3276540978190350201, guid: 1e873235fec021e4ea3408c47d0a1388, type: 3}
       propertyPath: Items
       value: 
       objectReference: {fileID: 1137593648}
@@ -104903,6 +104929,10 @@ PrefabInstance:
       propertyPath: Health
       value: 
       objectReference: {fileID: 336877273}
+    - target: {fileID: 3276540978190350201, guid: 1e873235fec021e4ea3408c47d0a1388, type: 3}
+      propertyPath: Cooldown
+      value: 
+      objectReference: {fileID: 1122900156}
     - target: {fileID: 3276540978190350201, guid: 1e873235fec021e4ea3408c47d0a1388, type: 3}
       propertyPath: Strength
       value: 
