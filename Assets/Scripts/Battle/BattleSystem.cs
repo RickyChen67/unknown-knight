@@ -32,6 +32,7 @@ public class BattleSystem : MonoBehaviour
     int currentMove;
     bool defended;
     int playerActions;
+    int monsterActions;
 
     List<BattleUnit> turnOrder = new List<BattleUnit>(2);
 
@@ -128,6 +129,7 @@ public class BattleSystem : MonoBehaviour
             yield return dialogBox.TypeDialog($"{monsterUnit.Monster.Monster.Name} has been Defeated");
 
             yield return new WaitForSeconds(1);
+            playerUnit.Monster.RestoreAR();
             OnBattleEnd(true);
         }
         else
@@ -230,22 +232,18 @@ public class BattleSystem : MonoBehaviour
             switch (currentMove)
             {
                 case 0:
-                    Debug.Log("Attack");
                     dialogBox.EnableMoveSelector(false);
                     dialogBox.EnableDialogText(true);
                     StartCoroutine(PerformPlayerAttack(0));
                     break;
                 case 1:
-                    Debug.Log("Defend");
                     dialogBox.EnableMoveSelector(false);
                     dialogBox.EnableDialogText(true);
                     StartCoroutine(PerformPlayerAttack(1));
                     break;
                 case 2:
-                    Debug.Log("Select Ability");
                     break;
                 case 3:
-                    Debug.Log("Select Item");
                     break;
                 case 4:
                     PlayerAction();

@@ -8,7 +8,6 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private MonsterObject playerObject;
     public MonsterManager PlayerObject { get; set; }
-    [SerializeField] private Dictionary<Items, int> items = new Dictionary<Items, int>();
     public TMP_Text Health;
     public TMP_Text Armor;
     public TMP_Text Strength;

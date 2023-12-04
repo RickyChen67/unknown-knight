@@ -9,15 +9,20 @@ public class Menu : MonoBehaviour
     int onOff = 0;
     bool isMute;
     GameObject on;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject introduction;
+
     void Start()
     {
-        
+        mainMenu.SetActive(true);
+        introduction.SetActive(false);
         GameObject on = GameObject.Find("ON");
     }
     public void PlayGame()
     {
-
-        SceneManager.LoadScene("Velder - Cloud City");
+        mainMenu.SetActive(false);
+        introduction.SetActive(true);
+        introduction.GetComponent<IntroductionScreen>().StartIntro();
     }
     public void Options()
     {

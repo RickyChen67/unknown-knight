@@ -24,7 +24,10 @@ public class BattleUnit : MonoBehaviour
             animator.runtimeAnimatorController = Monster.Monster.Animator;
         }
         else
+        {
             Monster = player.GetComponent<PlayerManager>().PlayerObject;
+            Monster.RestoreAR();
+        }
     }
 
     public void Attack()

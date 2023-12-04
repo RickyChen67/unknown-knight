@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -16,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float collisionRadius = 0.1f;
     [SerializeField] private LayerMask solidObjectsLayer;
     [SerializeField] private LayerMask randomEncounterLayer;
+    [SerializeField] private LayerMask teleportLayer;
+    [SerializeField] private string nextScene;
     [SerializeField] private List<MonsterObject> monsters;
 
 
@@ -61,6 +65,7 @@ public class PlayerController : MonoBehaviour
         moving = false;
 
         CheckForEncounters();
+        MoveScene(nextScene);
     }
 
     private bool Walkable(Vector3 targetPos)
@@ -81,6 +86,14 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isMoving", false);
                 OnEncounter(monsters[Random.Range(0, monsters.Count)]);
             }
+        }
+    }
+
+    private void MoveScene(string _nextScene)
+    {
+        if (Physics2D.OverlapCircle(transform.position, 0.2f, teleportLayer) != null)
+        {
+            SceneManager.LoadScene(_nextScene);
         }
     }
 }

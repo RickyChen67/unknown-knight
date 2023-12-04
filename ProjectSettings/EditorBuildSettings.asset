@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Option.unity
     guid: 72c114e10f42a214ca6ff20f07b02adf
   - enabled: 1
+    path: Assets/Scenes/Maps/Ruben - Starting Village.unity
+    guid: eee7bcaf1b1c9b94fb6abee436965fdf
+  - enabled: 1
+    path: Assets/Scenes/Maps/Ruben - Forest.unity
+    guid: 361fce831299c0a4a83db2c805842613
+  - enabled: 1
     path: Assets/Scenes/Maps/Velder - Cloud City.unity
-    guid: 45e51ed3edb0ff64ca8617ce6e10860d
+    guid: 67f94ec93f375bd4e921f486b86a2f1a
   m_configObjects: {}

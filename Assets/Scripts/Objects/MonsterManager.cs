@@ -39,6 +39,11 @@ public class MonsterManager
     public int Defend {  get { return Mathf.FloorToInt(MaxArmor * 0.5f);  } }
     public string DefendDescription {  get { return $"Raise up your shield and gain {Defend} temporary AR";  } }
 
+    public void RestoreAR()
+    {
+        AR = MaxArmor;
+    }
+
     public bool TakeDamage(MonsterManager attacker)
     {
         int damage = Mathf.FloorToInt(attacker.BasicAttack * Random.Range(0.9f, 1f));
