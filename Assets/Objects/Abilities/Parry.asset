@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b089d4f27cf95c4498cd0613772b10b, type: 3}
   m_Name: Parry
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: Parry
   description: 
   effect: {fileID: 0}
   damageAgainstHP: 0
