@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91e0051eb57adf45af3e3374c0b9598, type: 3}
   m_Name: Cheese
   m_EditorClassIdentifier: 
-  itemName: Pie
+  itemName: Cheese
   description: Recovers health (+5)
   sprite: {fileID: 0}
   itemType: 0
+  statusEffect: 0
