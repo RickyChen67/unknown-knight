@@ -22,27 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        PlayerObject = new MonsterManager(playerObject);
-    }
-
-    private void Update()
-    {
-        Health.SetText("Health: "+ PlayerObject.HP+"");
-        Armor.SetText("Armor: " + PlayerObject.AR + "");
-        Strength.SetText("Strength: " + PlayerObject.Monster.Strength + "");
-        Toughness.SetText("Toughness: " + PlayerObject.Monster.Toughness + "");
-        Speed.SetText("Speed: " + PlayerObject.Monster.Speed + "");
-        Crit.SetText("Critical Chance: " + PlayerObject.CritRate + "");
-        AbilitiesText.SetText("");
-        for (int i = 0; i < PlayerObject.Monster.Abilities.Count; i++)
-        {
-            
-            AbilitiesText.SetText("" + AbilitiesText.text + "" + PlayerObject.Monster.Abilities[i].Name + "   Cooldown: " + PlayerObject.Monster.Abilities[i].Cooldown + "\n");
-        }
-
-        //Items.SetText("" + items + " ");
-
-
+        PlayerObject = new MonsterManager(playerObject, playerObject.Level) ;
         // Input ESC to open/close pause menu
         // Input E to open/close player inventory
         // Use player.Stats.Strengh, player.Stats.Toughness, player.Stats.Speed for showing base stats dynamically
@@ -51,5 +31,19 @@ public class PlayerManager : MonoBehaviour
         // Use player.CritRate to get critical chance
         // Use player.Stats.Abilities to get the abilities
         // Use items to get both the items and quantity
+
+        Health.SetText("Health: " + PlayerObject.HP + "");
+        Armor.SetText("Armor: " + PlayerObject.AR + "");
+        Strength.SetText("Strength: " + PlayerObject.Monster.Strength + "");
+        Toughness.SetText("Toughness: " + PlayerObject.Monster.Toughness + "");
+        Speed.SetText("Speed: " + PlayerObject.Monster.Speed + "");
+        Crit.SetText("Critical Chance: " + PlayerObject.CritRate + "");
+        AbilitiesText.SetText("");
+        for (int i = 0; i < PlayerObject.Monster.Abilities.Count; i++)
+        {
+
+            AbilitiesText.SetText("" + AbilitiesText.text + "" + PlayerObject.Monster.Abilities[i].Name + "   Cooldown: " + PlayerObject.Monster.Abilities[i].Cooldown + "\n");
+        }
+        //Items.SetText("" + items + " ");
     }
 }

@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask randomEncounterLayer;
     [SerializeField] private List<MonsterObject> monsters;
 
+
     public event Action<MonsterObject> OnEncounter;
     public void HandleUpdate()
     {
@@ -78,7 +79,6 @@ public class PlayerController : MonoBehaviour
             if (Random.Range(1, 101) <= 10)
             {
                 animator.SetBool("isMoving", false);
-                Debug.Log("Encountered a Monster!");
                 OnEncounter(monsters[Random.Range(0, monsters.Count)]);
             }
         }

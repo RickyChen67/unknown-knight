@@ -6,7 +6,7 @@ public class MonsterManager
 {
     public MonsterObject Monster { get; set; }
     public int Level { get; set; }
-    int statPoints;
+    //int statPoints;
 
     public int HP { get; set; }
     public int AR { get; set; }
@@ -16,7 +16,7 @@ public class MonsterManager
     {
         Monster = _stats;
         Level = _level;
-        if (Level == 1) { statPoints = 2; }
+        //if (Level == 1) { statPoints = 2; }
         HP = MaxHealth;
         AR = MaxArmor;
 
@@ -42,8 +42,6 @@ public class MonsterManager
     public bool TakeDamage(MonsterManager attacker)
     {
         int damage = Mathf.FloorToInt(attacker.BasicAttack * Random.Range(0.9f, 1f));
-        Debug.Log(attacker.Monster.Strength);
-        Debug.Log(damage);
         if (AR > 0)
         {
             AR -= damage;
@@ -68,7 +66,6 @@ public class MonsterManager
     {
         defendAR = AR;
         AR += Defend;
-        Debug.Log(AR);
     }
 
     public void PostDefend()

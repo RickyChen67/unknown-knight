@@ -23,7 +23,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleUnit monsterUnit;
     [SerializeField] BattleHUD monsterHUD;
     [SerializeField] BattleDialogBox dialogBox;
-    [SerializeField] Image backgroundImage = null;
+    //[SerializeField] Image backgroundImage = null;
 
     public event Action<bool> OnBattleEnd;
 
