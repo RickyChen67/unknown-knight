@@ -17,7 +17,8 @@ public class PlayerManager : MonoBehaviour
     public TMP_Text Crit;
     public TMP_Text AbilitiesText;
     public TMP_Text Items;
-
+    public TMP_Text Cooldown;
+    public TMP_Text Count;
 
 
     void Start()
@@ -32,12 +33,22 @@ public class PlayerManager : MonoBehaviour
         Strength.SetText("Strength: " + PlayerObject.Monster.Strength + "");
         Toughness.SetText("Toughness: " + PlayerObject.Monster.Toughness + "");
         Speed.SetText("Speed: " + PlayerObject.Monster.Speed + "");
-        Crit.SetText("Critical Chance: " + PlayerObject.CritRate + "");
+        Crit.SetText("Crit Chance: " + PlayerObject.CritRate + "%");
         AbilitiesText.SetText("");
+        Cooldown.SetText("");
         for (int i = 0; i < PlayerObject.Monster.Abilities.Count; i++)
         {
-            
-            AbilitiesText.SetText("" + AbilitiesText.text + "" + PlayerObject.Monster.Abilities[i].Name + "   Cooldown: " + PlayerObject.Monster.Abilities[i].Cooldown + "\n");
+
+            AbilitiesText.SetText("" + AbilitiesText.text + "" + PlayerObject.Monster.Abilities[i].Name + "\n");
+            Cooldown.SetText("" + Cooldown.text + "Cooldown: " + PlayerObject.Monster.Abilities[i].Cooldown + "\n");
+        }
+        Items.SetText("");
+        Count.SetText("");
+        for (int i = 0; i < PlayerObject.Monster.Abilities.Count; i++)
+        {
+
+            Items.SetText("" + Items.text + "" + PlayerObject.Monster.Items[i].item.itemName + "\n");
+            Count.SetText("" + Count.text + "Count: " + PlayerObject.Monster.Items[i].count + "\n");
         }
 
         //Items.SetText("" + items + " ");
