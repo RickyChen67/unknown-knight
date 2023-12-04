@@ -42,9 +42,17 @@ public class PlayerManager : MonoBehaviour
         Cooldown.SetText("");
         for (int i = 0; i < PlayerObject.Monster.Abilities.Count; i++)
         {
-            
-            AbilitiesText.SetText("" + AbilitiesText.text + "" + PlayerObject.Monster.Abilities[i].Name + "   CD: " + PlayerObject.Monster.Abilities[i].Cooldown + "\n");
+
+            AbilitiesText.SetText("" + AbilitiesText.text + "" + PlayerObject.Monster.Abilities[i].Name + "\n");
+            Cooldown.SetText("" + Cooldown.text + "CD: " + PlayerObject.Monster.Abilities[i].Cooldown + "\n");
         }
-        //Items.SetText("" + items + " ");
+        Items.SetText("");
+        Count.SetText("");
+        for (int i = 0; i < PlayerObject.Monster.Abilities.Count; i++)
+        {
+
+            Items.SetText("" + Items.text + "" + PlayerObject.Monster.Items[i].item.itemName + "\n");
+            Count.SetText("" + Count.text + "Count: " + PlayerObject.Monster.Items[i].count + "\n");
+        }
     }
 }

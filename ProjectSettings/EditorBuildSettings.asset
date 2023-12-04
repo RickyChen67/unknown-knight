@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/Velder - Cloud City.unity
     guid: 67f94ec93f375bd4e921f486b86a2f1a
+  - enabled: 1
+    path: Assets/Scenes/EndMenu.unity
+    guid: 7e60676e3817f794c9536c19edf8acfd
   m_configObjects: {}
